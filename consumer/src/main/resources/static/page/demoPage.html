@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script language="JavaScript" src="../js/jquery.min.js" ></script>
+    <script language="JavaScript" src="../js/ycdcommon.js" ></script>
+    <script>
+        window.onload = function () {
+            const result = YCDCommon.Ajax.syncAjax("http://localhost:8080/consumer/test1", {});
+            console.log(result);
+            document.getElementById("id").innerText = result[0].id;
+            document.getElementById("name").innerText = result[0].name;
+        }
+    </script>
+</head>
+<body>
+    <div id="id">
+
+    </div>
+    <div id="name">
+
+    </div>
+</body>
+</html>
