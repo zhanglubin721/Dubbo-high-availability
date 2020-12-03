@@ -28,6 +28,7 @@ public class TestController {
         noticeBroadcast.run();
     }
 
+    //测试
     @RequestMapping("test3")
     public void test3() throws Exception {
         noticeBroadcast.stop();
