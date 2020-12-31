@@ -1,6 +1,7 @@
 package com.yicaida.consumer.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.yicaida.projectAPI.pojo.Student;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.yicaida.projectAPI.pojo.User;
@@ -20,6 +21,11 @@ public class TestController {
     @RequestMapping("test1")
     public List<User> test1() {
         return userService.findAllUser();
+    }
+
+    @RequestMapping("findData")
+    public List<Student> findData() {
+        return userService.findData();
     }
 
     @RequestMapping("test2")

@@ -1,6 +1,7 @@
 package com.yicaida.provider.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.yicaida.projectAPI.pojo.Student;
 import com.yicaida.provider.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.yicaida.projectAPI.pojo.User;
@@ -21,5 +22,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUser() {
         return userMapper.findAllUser();
+    }
+
+    @Override
+    public List<Student> findData() {
+        return userMapper.findData();
     }
 }
