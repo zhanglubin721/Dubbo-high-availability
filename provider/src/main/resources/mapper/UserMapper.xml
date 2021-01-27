@@ -26,4 +26,9 @@
         select s.*, sc.sid as scid, sc.student_id, sc.course_id, sc.num  from student s left join score sc on s.sid = sc.student_id
     </select>
 
+    <select id="getAllTable" resultType="map">
+        select *
+        from bi_facts
+    </select>
+
 </mapper>

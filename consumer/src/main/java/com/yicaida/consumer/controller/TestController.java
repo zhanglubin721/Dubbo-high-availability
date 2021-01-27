@@ -8,6 +8,7 @@ import com.yicaida.projectAPI.pojo.User;
 import service.UserService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController()
 @RequestMapping("testController")
@@ -28,25 +29,25 @@ public class TestController {
         return userService.findData();
     }
 
+    @RequestMapping("getAllTable")
+    public List<Map<String, Object>> getAllTable() throws Exception {
+        return userService.getAllTable();
+    }
+
     @RequestMapping("test2")
     public void test2() throws Exception {
         noticeBroadcast = new NoticeBroadcast(10001);
         noticeBroadcast.run();
     }
 
-    //测试
-    //测试4
-    //测试2
-    //测试3
     @RequestMapping("test3")
     public void test3() throws Exception {
         noticeBroadcast.stop();
     }
-    //111
-    //22
-    //33
-    //44
 
-    //55
+    @RequestMapping("testRedis")
+    public void testRedis() {
+        userService.testRedis();
+    }
 
 }
