@@ -12,5 +12,6 @@
 </head>
 <body>
 <div>111</div>
+<div>${bbb}</div>
 </body>
 </html>

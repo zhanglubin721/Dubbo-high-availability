@@ -2,11 +2,19 @@ package com.yicaida.consumer.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.yicaida.projectAPI.pojo.Student;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import com.yicaida.projectAPI.pojo.User;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +25,14 @@ public class TestController {
     @Reference
     private UserService userService;
 
-    private  NoticeBroadcast noticeBroadcast;
-
     @RequestMapping("test1")
-    public List<User> test1() {
-        return userService.findAllUser();
+    public List<User> test1(HttpServletRequest httpRequest, RedirectAttributes redirectAttributes) {
+        HttpSession session = httpRequest.getSession();
+        String test = (String)session.getAttribute("bbb");
+        Cookie[] cookies = httpRequest.getCookies();
+        System.out.println(test);
+        return null;
+//        return userService.findAllUser();
     }
 
     @RequestMapping("findData")
@@ -32,17 +43,6 @@ public class TestController {
     @RequestMapping("getAllTable")
     public List<Map<String, Object>> getAllTable() throws Exception {
         return userService.getAllTable();
-    }
-
-    @RequestMapping("test2")
-    public void test2() throws Exception {
-        noticeBroadcast = new NoticeBroadcast(10001);
-        noticeBroadcast.run();
-    }
-
-    @RequestMapping("test3")
-    public void test3() throws Exception {
-        noticeBroadcast.stop();
     }
 
     @RequestMapping("testRedis")
