@@ -25,6 +25,7 @@ public class TestController {
     @Reference
     private UserService userService;
 
+
     @RequestMapping("test1")
     public List<User> test1(HttpServletRequest httpRequest, RedirectAttributes redirectAttributes) {
         HttpSession session = httpRequest.getSession();
