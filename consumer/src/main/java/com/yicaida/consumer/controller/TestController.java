@@ -1,6 +1,7 @@
 package com.yicaida.consumer.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.yicaida.projectAPI.pojo.Student;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ import java.util.Map;
 @RequestMapping("testController")
 public class TestController {
 
-    @Reference(loadbalance = "roundrobin")
+    @Reference(loadbalance = "roundrobin", version = "1.0.1", group = "alibaba")
     private UserService userService;
 
 
@@ -37,6 +38,7 @@ public class TestController {
     }
 
     @RequestMapping("findData")
+    @HystrixCommand(fallbackMethod = "aaa")
     public List<Student> findData() {
         return userService.findData();
     }
@@ -49,6 +51,11 @@ public class TestController {
     @RequestMapping("testRedis")
     public void testRedis() {
         userService.testRedis();
+    }
+
+    public List<Student> aaa() {
+        System.out.println("进入熔断");
+        return null;
     }
 
 }
