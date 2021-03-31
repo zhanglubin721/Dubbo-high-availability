@@ -32,7 +32,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Student> findData() {
-        return userMapper.findData();
+//        return userMapper.findData();
+        return null;
     }
 
     @Override

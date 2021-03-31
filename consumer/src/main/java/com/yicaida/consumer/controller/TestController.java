@@ -22,7 +22,7 @@ import java.util.Map;
 @RequestMapping("testController")
 public class TestController {
 
-    @Reference
+    @Reference(loadbalance = "roundrobin")
     private UserService userService;
 
 
