@@ -1,6 +1,9 @@
 package com.yicaida.consumer.controller;
 
+import com.alibaba.dubbo.config.ApplicationConfig;
+import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.rpc.service.GenericService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.yicaida.projectAPI.pojo.Student;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,10 +40,27 @@ public class TestController {
 //        return userService.findAllUser();
     }
 
-    @RequestMapping("findData")
     @HystrixCommand(fallbackMethod = "aaa")
+    @RequestMapping("findData")
     public List<Student> findData() {
+        //直接调用
         return userService.findData();
+    }
+
+    @HystrixCommand(fallbackMethod = "aaa")
+    @RequestMapping("findData2")
+    public List<Student> findData2() {
+        //泛化调用
+        ReferenceConfig<GenericService> reference = new ReferenceConfig<>();
+        reference.setApplication(new ApplicationConfig("provider"));
+        reference.setGroup("alibaba");
+        reference.setVersion("1.0.1");
+        reference.setInterface("service.UserService");
+        reference.setUrl("dubbo://127.0.0.1:20880?scope=remote");
+        reference.setGeneric(true);
+        GenericService genericService = reference.get();
+        genericService.$invoke("findData", new String[]{}, new Object[]{});
+        return null;
     }
 
     @RequestMapping("getAllTable")
