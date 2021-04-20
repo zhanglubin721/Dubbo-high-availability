@@ -36,10 +36,10 @@ public class ThreadTest {
         Thread.sleep(2000);
         System.out.println(System.currentTimeMillis() + " 运动结束,看看外卖到了没");
 
-        if (!futureTask.isDone()){
+        if (!futureTask.isDone()) {
             System.out.println(System.currentTimeMillis() + " 外卖还没到,在等等吧");
             Thread.sleep(1000);
-            if (!futureTask.isDone()){
+            if (!futureTask.isDone()) {
                 System.out.println(System.currentTimeMillis() + " 妈的外卖还没到,取消，吃食堂去");
                 futureTask.cancel(false);
             }
@@ -47,9 +47,9 @@ public class ThreadTest {
         if (!futureTask.isCancelled()) {
             Boolean res = futureTask.get();
             System.out.println(System.currentTimeMillis() + " 外卖到了");
-            if (res){
+            if (res) {
                 System.out.println("太多了吃撑了");
-            }else{
+            } else {
                 System.out.println("太少了，不够吃，再去食堂吃一点");
             }
         }
