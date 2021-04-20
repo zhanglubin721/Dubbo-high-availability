@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,9 +74,20 @@ public class TestController {
         userService.testRedis();
     }
 
+    @RequestMapping("testapp")
+    public Map<String, Object> testapp(String productid, String hello) {
+        System.out.println("调用成功");
+        System.out.println("productid: " + productid);
+        System.out.println("hello: " + hello);
+        HashMap<String, Object> stringObjectHashMap = new HashMap<>();
+        stringObjectHashMap.put("数据", "aaa");
+        return stringObjectHashMap;
+    }
+
     public List<Student> aaa() {
         System.out.println("进入熔断");
         return null;
     }
+
 
 }
