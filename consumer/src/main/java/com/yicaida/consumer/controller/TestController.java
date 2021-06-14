@@ -6,13 +6,12 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.rpc.service.GenericService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.yicaida.projectAPI.pojo.Student;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import com.yicaida.projectAPI.pojo.User;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -23,8 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController()
+@RestController
 @RequestMapping("testController")
+@CrossOrigin()
 public class TestController {
 
     @Reference(loadbalance = "roundrobin", version = "1.0.1", group = "alibaba")
@@ -46,6 +46,12 @@ public class TestController {
     public List<Student> findData() {
         //直接调用
         return userService.findData();
+    }
+
+    @RequestMapping("testCookie")
+    public void testCookie(@CookieValue(value="name",required=false) String name, @CookieValue(value="password",required=false) String password) {
+        System.out.println(name);
+        System.out.println(password);
     }
 
     @HystrixCommand(fallbackMethod = "aaa")
