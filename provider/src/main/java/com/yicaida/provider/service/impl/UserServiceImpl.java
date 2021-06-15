@@ -64,74 +64,74 @@ public class UserServiceImpl implements UserService {
     }
 
     //测试jdk8新特性 stream流
-    @Test
-    public void test1() {
-        User user1 = new User();
-        User user2 = new User();
-        User user3 = new User();
-        User user4 = new User();
-        User user5 = new User();
-        User user6 = new User();
-        user1.setName("1");
-        user2.setName("2");
-        user3.setName("3");
-        user4.setName("4");
-        user5.setName("5");
-        user6.setName("6");
+//    @Test
+//    public void test1() {
+//        User user1 = new User();
+//        User user2 = new User();
+//        User user3 = new User();
+//        User user4 = new User();
+//        User user5 = new User();
+//        User user6 = new User();
+//        user1.setName("1");
+//        user2.setName("2");
+//        user3.setName("3");
+//        user4.setName("4");
+//        user5.setName("5");
+//        user6.setName("6");
+//
+//        ArrayList<User> users = new ArrayList<>();
+//        users.add(user1);
+//        users.add(user2);
+//        users.add(user3);
+//        users.add(user4);
+//        users.add(user5);
+//        users.add(user6);
+//
+//        ArrayList<User> usersNameIs1 = new ArrayList<>();
+//
+//        List<Student> collect = users.stream().filter(user -> {
+//            return "1".equals(user.getName()) || "2".equals(user.getName());
+//        }).map(user -> {
+//            Student student = new Student();
+//            student.setSname(user.getName());
+//            return student;
+//        }).collect(Collectors.toList());
+//
+//        for (Student student : collect) {
+//            System.out.println(student.getSname());
+//        }
+//
+//        Integer integer = new Integer(1);
+//
+//    }
 
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.add(user5);
-        users.add(user6);
-
-        ArrayList<User> usersNameIs1 = new ArrayList<>();
-
-        List<Student> collect = users.stream().filter(user -> {
-            return "1".equals(user.getName()) || "2".equals(user.getName());
-        }).map(user -> {
-            Student student = new Student();
-            student.setSname(user.getName());
-            return student;
-        }).collect(Collectors.toList());
-
-        for (Student student : collect) {
-            System.out.println(student.getSname());
-        }
-
-        Integer integer = new Integer(1);
-
-    }
-
-    @Test
-    public void test2() {
-        String a = "test";
-        String b = "test";
-        String c = new String("test");
-        if (a == b) {
-            System.out.println("a == b " + true);
-        }
-        if (a == c) {
-            System.out.println("a == c " + true);
-        } else {
-            System.out.println("a == c " + false);
-        }
-
-        int i = "Aa".hashCode();
-        int j = "BB".hashCode();
-        System.out.println(i);
-        System.out.println(j);
-
-        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
-        objectObjectHashMap.put("Aa", "1");
-        objectObjectHashMap.put("BB", "2");
-        Set<Map.Entry<Object, Object>> entries = objectObjectHashMap.entrySet();
-        for (Map.Entry<Object, Object> entry : entries) {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
-        }
-    }
+//    @Test
+//    public void test2() {
+//        String a = "test";
+//        String b = "test";
+//        String c = new String("test");
+//        if (a == b) {
+//            System.out.println("a == b " + true);
+//        }
+//        if (a == c) {
+//            System.out.println("a == c " + true);
+//        } else {
+//            System.out.println("a == c " + false);
+//        }
+//
+//        int i = "Aa".hashCode();
+//        int j = "BB".hashCode();
+//        System.out.println(i);
+//        System.out.println(j);
+//
+//        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+//        objectObjectHashMap.put("Aa", "1");
+//        objectObjectHashMap.put("BB", "2");
+//        Set<Map.Entry<Object, Object>> entries = objectObjectHashMap.entrySet();
+//        for (Map.Entry<Object, Object> entry : entries) {
+//            System.out.println(entry.getKey());
+//            System.out.println(entry.getValue());
+//        }
+//    }
 
 }
