@@ -13,17 +13,17 @@ public class ReentrantLockDemo {
         for (int i = 1; i <= num; i++) {
             new Thread(() -> {
                 sharedResource.print10();
-            }, "B").start();
+            }, "B" + i).start();
         }
         for (int i = 1; i <= num; i++) {
             new Thread(() -> {
                 sharedResource.print15();
-            }, "C").start();
+            }, "C" + i).start();
         }
         for (int i = 1; i <= num; i++) {
             new Thread(() -> {
                 sharedResource.print5();
-            }, "A").start();
+            }, "A" + i).start();
         }
     }
 }

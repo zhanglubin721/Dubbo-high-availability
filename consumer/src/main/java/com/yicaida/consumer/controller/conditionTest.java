@@ -1,5 +1,7 @@
 package com.yicaida.consumer.controller;
 
+import org.junit.Test;
+
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -89,5 +91,13 @@ public class conditionTest {
         } finally {
             lock.unlock();
         }
+    }
+
+
+    @Test
+    public void test111() {
+        String aaa = "fsda432";
+        int i = aaa.hashCode();
+        System.out.println(i);
     }
 }

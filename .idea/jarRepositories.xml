@@ -21,5 +21,15 @@
       <option name="name" value="Central Repository" />
       <option name="url" value="https://maven.aliyun.com/repository/public" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://maven.aliyun.com/repository/central" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="local-nexus" />
+      <option name="name" value="local-nexus" />
+      <option name="url" value="http://nexus.ikang.com/content/groups/public/" />
+    </remote-repository>
   </component>
 </project>

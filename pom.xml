@@ -9,6 +9,7 @@
     <version>1.0.1</version>
 
 
+
     <modules>
         <module>consumer</module>
         <module>projectAPI</module>
