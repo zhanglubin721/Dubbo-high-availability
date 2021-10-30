@@ -3,7 +3,6 @@ package com.yicaida.provider.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.fdd.api.client.constant.ApiUrlConstant;
 import org.apache.jute.Index;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
