@@ -7,28 +7,28 @@
       SELECT * FROM test_user
     </select>
 
-    <resultMap id="findAllResultMap" type="student">
-        <id property="sid" column="sid"/>
-        <result property="gender" column="gender"/>
-        <result property="class_id" column="class_id"/>
-        <result property="sname" column="sname"/>
-        <collection property="scores" ofType="score">
-            <!--映射主键id-->
-            <id property="sid" column="scid"/>
-            <!--映射普通成员变量-->
-            <result property="student_id" column="student_id"/>
-            <result property="course_id" column="course_id"/>
-            <result property="num" column="num"/>
-        </collection>
-    </resultMap>
+<!--    <resultMap id="findAllResultMap" type="student">-->
+<!--        <id property="sid" column="sid"/>-->
+<!--        <result property="gender" column="gender"/>-->
+<!--        <result property="class_id" column="class_id"/>-->
+<!--        <result property="sname" column="sname"/>-->
+<!--        <collection property="scores" ofType="score">-->
+<!--            &lt;!&ndash;映射主键id&ndash;&gt;-->
+<!--            <id property="sid" column="scid"/>-->
+<!--            &lt;!&ndash;映射普通成员变量&ndash;&gt;-->
+<!--            <result property="student_id" column="student_id"/>-->
+<!--            <result property="course_id" column="course_id"/>-->
+<!--            <result property="num" column="num"/>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
 
-    <select id="findData" resultMap="findAllResultMap">
-        select s.*, sc.sid as scid, sc.student_id, sc.course_id, sc.num  from student s left join score sc on s.sid = sc.student_id
-    </select>
+<!--    <select id="findData" resultMap="findAllResultMap">-->
+<!--        select s.*, sc.sid as scid, sc.student_id, sc.course_id, sc.num  from student s left join score sc on s.sid = sc.student_id-->
+<!--    </select>-->
 
-    <select id="getAllTable" resultType="map">
-        select *
-        from bi_facts
-    </select>
+<!--    <select id="getAllTable" resultType="map">-->
+<!--        select *-->
+<!--        from bi_facts-->
+<!--    </select>-->
 
 </mapper>
