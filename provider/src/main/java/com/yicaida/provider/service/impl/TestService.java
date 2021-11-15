@@ -3,19 +3,14 @@ package com.yicaida.provider.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.jute.Index;
+import com.yicaida.projectAPI.pojo.Student;
 import org.junit.Test;
-import org.springframework.util.StringUtils;
-
-import java.sql.Array;
-import java.text.DecimalFormat;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -432,5 +427,43 @@ public class TestService {
     }
 
 
+
+    @Test
+    public void test4242() {
+        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> newList = new ArrayList<>();
+        list.add("fafa123fdsfa");
+        list.add("123fdsfas");
+        list.add("fsaf1234");
+        list.add("fsaf1234fasfs");
+        HashMap<String, String> numTrueStringHashMap = new HashMap<>();
+        for (String value : list) {
+            char[] chars = value.toCharArray();
+            StringBuffer numBuffer = new StringBuffer();
+            for (int i = 0; i < chars.length; i++) {
+                if (chars[i] >= 48 && chars[i] <= 57) {
+                    numBuffer.append(chars[i]);
+                }
+            }
+            if (numBuffer.length() > 0) {
+                numTrueStringHashMap.put(numBuffer.toString(), value);
+            }
+        }
+
+        Set<String> strings1 = numTrueStringHashMap.keySet();
+        for (String key : strings1) {
+            newList.add(numTrueStringHashMap.get(key));
+        }
+        for (int i = 0; i < newList.size(); i++) {
+            System.out.println(newList.get(i));
+        }
+    }
+
+
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(TestConfig.class);
+        Student student = (Student)annotationConfigApplicationContext.getBean("student");
+        student.sayHello();
+    }
 
 }
