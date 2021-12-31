@@ -1,5 +1,7 @@
 package com.yicaida.consumer.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -9,9 +11,44 @@ import java.util.concurrent.*;
 //测试callbale的能力
 public class ThreadTest {
 
+    //线程池，保证项目不会内存溢出
+    public static ExecutorService threadPool = Executors.newFixedThreadPool(2);
+
+    static class InsertCallable implements Callable<Boolean>{
+
+        private final List<Object> param;
+
+        public InsertCallable(List<Object> param) {
+            this.param = param;
+        }
+
+        @Override
+        public Boolean call() throws Exception {
+            try {
+                //insert逻辑
+                //param是参数
+                List<Object> myParam = this.param;
+            } catch (Exception e) {
+                //异常处理,sql回退之类的
+                return false;
+            }
+            return true;
+        }
+    }
+
+    //传参是insert sql的参数
+    public Boolean doInsert(List<Object> param) {
+        //new线程运行类并传递insert sql参数
+        InsertCallable insertCallable = new InsertCallable(param);
+        FutureTask<Boolean> insertCallableFutureTask = new FutureTask(insertCallable);
+        threadPool.execute(insertCallableFutureTask);
+        return true;
+    }
+
+
     static class WaiMai{}
 
-    static class DianWaiMai implements Callable<Boolean>{
+    static class DianWaiMai implements Callable<Boolean> {
         private WaiMai waimai;
 
         DianWaiMai(WaiMai waimai){
@@ -55,4 +92,6 @@ public class ThreadTest {
         }
         threadPool.shutdown();
     }
+
+
 }

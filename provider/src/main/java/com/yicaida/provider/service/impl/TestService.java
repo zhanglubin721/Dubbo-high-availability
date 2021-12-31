@@ -3,11 +3,34 @@ package com.yicaida.provider.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.yicaida.projectAPI.pojo.Number;
 import com.yicaida.projectAPI.pojo.Student;
+import com.yicaida.projectAPI.pojo.User;
+import jdk.internal.org.objectweb.asm.AnnotationVisitor;
+import jdk.internal.org.objectweb.asm.ClassReader;
+import jdk.internal.org.objectweb.asm.ClassVisitor;
+import jdk.internal.org.objectweb.asm.Opcodes;
+import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import sun.misc.BASE64Decoder;
+import sun.misc.Unsafe;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.SoftReference;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URLDecoder;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -19,7 +42,8 @@ import java.util.stream.Stream;
  */
 public class TestService {
 
-    public static Integer a = 3;
+    @Value("${zlb.aaa}")
+    public String aaa;
 
     //冒泡排序 数组实现
     @Test
@@ -347,19 +371,6 @@ public class TestService {
         System.out.println(endTime - startTime);
     }
 
-    //2021-10-12
-    public class ListNode {
-        int val;
-        ListNode next;
-        ListNode() {}
-        ListNode(int val) {
-            this.val = val;
-        }
-        ListNode(int val, ListNode next) {
-            this.val = val; this.next = next;
-        }
-    }
-
     public int removeDuplicates(int[] nums) {
         int length = 1;
         if (nums.length == 0) {
@@ -459,11 +470,141 @@ public class TestService {
         }
     }
 
+    private int x = 0, y = 0;
+    private int a = 0, b =0;
 
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(TestConfig.class);
-        Student student = (Student)annotationConfigApplicationContext.getBean("student");
-        student.sayHello();
+    @Test
+    public void test32324() throws InterruptedException {
+        int i = 0;
+        for(;;) {
+            i++;
+            x = 0; y = 0;
+            a = 0; b = 0;
+            Thread one = new Thread(() -> {
+                a = 1;
+                x = b;
+            });
+
+            Thread other = new Thread(() -> {
+                b = 1;
+                y = a;
+            });
+            one.start();
+            other.start();
+            one.join();
+            other.join();
+            System.out.println("第" + i + "次尝试");
+            String result = "第" + i + "次 (" + x + "," + y + "）";
+            if(x == 0 && y == 0) {
+                System.err.println(result);
+                break;
+            } else {
+                //System.out.println(result);
+            }
+        }
     }
+
+    @Test
+    public void test42342() {
+        ArrayList<Object[]> objects = new ArrayList<>();
+        objects.add(new Object[] { new Student(), new User()});
+        for (Object[] object : objects) {
+            for (Object o : object) {
+                System.out.println(o.toString());
+            }
+        }
+    }
+
+    @Test
+    public void test4232() {
+
+        HashSet<String> nowMIsCodeSet = new HashSet<>();
+        nowMIsCodeSet.add("1");
+        nowMIsCodeSet.add("2");
+        nowMIsCodeSet.add("3");
+        nowMIsCodeSet.add("4");
+
+        HashSet<String> historyMisCodeSet = new HashSet<>();
+        historyMisCodeSet.add("2");
+        historyMisCodeSet.add("3");
+        historyMisCodeSet.add("4");
+        historyMisCodeSet.add("5");
+
+
+        HashSet<String> needInsert = new HashSet(nowMIsCodeSet);
+        HashSet<String> needDelete = new HashSet(historyMisCodeSet);
+        HashSet<String> needUpate = new HashSet(nowMIsCodeSet);
+        needInsert.removeAll(historyMisCodeSet);
+        needDelete.removeAll(nowMIsCodeSet);
+        needUpate.retainAll(historyMisCodeSet);
+
+        out(needInsert);
+        System.out.println("-------------");
+        out(needDelete);
+        System.out.println("-------------");
+        out(needUpate);
+        System.out.println("-------------");
+        System.out.println(needUpate.toString());
+    }
+
+    public void out(HashSet<String> set) {
+        ReentrantLock reentrantLock = new ReentrantLock();
+        for (String s : set) {
+            System.out.println(s);
+        }
+    }
+
+    @Test
+    public void test324() throws InterruptedException {
+        final Number number = new Number();
+//        final Number number2 = new Number();
+        Thread thread = new Thread(() -> {
+            number.getOne();
+        });
+
+
+        Thread thread2 = new Thread(() -> {
+            number.getTwo();
+        });
+
+        thread.start();
+        thread2.start();
+
+//        thread.join();
+//        thread2.join();
+
+    }
+
+    @Test
+    public void testeew() {
+        double num1 = 0.88;
+        double num2 = 1.1;
+        double num3 = 1.51;
+        double num4 = 0;
+
+        System.out.println(option(num1));
+        System.out.println(option(num2));
+        System.out.println(option(num3));
+        System.out.println(option(num4));
+
+    }
+
+    public double option(double num) {
+        final Double ZERO = 0D;
+        if (num <= 0) {
+            return ZERO;
+        }
+        int ti = (int) num;
+        double td = num - ti;
+        if (ZERO.equals(td)) {
+            return ti;
+        }
+        if (td >= 0.5) {
+            return ti + 1;
+        }
+        return ti + 0.5;
+    }
+
+
 
 }
